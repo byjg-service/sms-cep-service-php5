@@ -7,9 +7,6 @@ Os Serviços ByJG públicos são
 + SMS - Serviço de envio de SMS por Web Service
 + CEP - Serviço de consulta de CEPs Brasileitos por Web Service
 
-Navegar no código fonte
-+ https://github.com/byjg/byjg-service-examples
-
 Endereços:
 + Site Principal: http://www.byjg.com.br/
 + SMS Service: http://www.byjg.com.br/site/xmlnuke.php?xml=smswebservice
@@ -18,7 +15,128 @@ Endereços:
 
 O repositório com os exemplos é público e quem quiser ter acesso para incluir modificações basta se cadastrar no site e solicitar o acesso através do contato. 
 
-Abaixo alguns exemplos:
+## Instalando
+
+Para instalar use o composer na sua pasta de projeto:
+
+```
+composer require byjg/sms-cep-service-php5
+```
+
+## SMS: Exemplos de utilização:
+
+```php
+require "vendor/autoload.php";
+
+// Crie o seu usuário e senha no site:
+// http://www.byjg.com.br/
+$usuario = 'NOMEUSUARIO';
+$senha = 'SENHA';
+
+// Enviar um SMS
+$sms = new \ByJG\WebService\Sms($usuario, $senha);
+$retorno = $sms->enviarSms('21', '999991234', 'Mensagem do SMS');
+
+/***
+O Retorno será um array no seguinte formato:
+
+Array
+(
+	[status] => 'OK'
+	[raw] => 'OK|0, Delivery'
+	[data] => Array
+		(
+			[code] => '0'
+			[info] => 'Delivery'
+		)
+)
+*/
+```
+
+## CEP: Exemplos de utilização:
+
+```php
+require "vendor/autoload.php";
+
+// Crie o seu usuário e senha no site:
+// http://www.byjg.com.br/
+$usuario = 'NOMEUSUARIO';
+$senha = 'SENHA';
+
+// Obter o Logradouro à partir do CEP
+$cep = new \ByJG\WebService\Cep($usuario, $senha);
+$retorno = $cep->obterLogradouro('01311000');
+
+/***
+O Retorno será um array no seguinte formato:
+
+Array
+(
+    [status] => OK
+    [raw] => OK|Avenida Paulista - até 609 - lado ímpar, Bela Vista, São Paulo, SP, 3550308
+    [data] => Array
+        (
+            [code] => 0
+            [info] => Array
+                (
+                    [logradouro] => Avenida Paulista - até 609 - lado ímpar
+                    [bairro] => Bela Vista
+                    [cidade] => São Paulo
+                    [uf] => SP
+                    [ibge] => 3550308
+                )
+
+        )
+
+)
+*/
+
+// Obter o CEP à partir do Logradouro
+$retorno = $cep->obterCEP('Avenida Paulista', 'Sao Paulo', 'SP');
+
+/***
+O Retorno será algo deste tipo (os itens foram cortados):
+
+Array
+(
+    [status] => OK
+    [raw] => OK|40|01311000, Avenida Paulista - até 609 - lado ímpar, Bela Vista, São Paulo, SP, 3550308|01310000, Avenida Paulista - até 610 - lado par, Bela Vista, São Paulo, SP, 3550308|...
+    [data] => Array
+        (
+            [code] => 0
+            [info] => Array
+                (
+                    [0] => Array
+                        (
+                            [logradouro] => Avenida Paulista - até 609 - lado ímpar
+                            [bairro] => Bela Vista
+                            [cidade] => São Paulo
+                            [uf] => SP
+                            [ibge] => 3550308
+                            [cep] => 01311000
+                        )
+
+                    [1] => Array
+                        (
+                            [logradouro] => Avenida Paulista - até 610 - lado par
+                            [bairro] => Bela Vista
+                            [cidade] => São Paulo
+                            [uf] => SP
+                            [ibge] => 3550308
+                            [cep] => 01310000
+                        )
+
+                )
+
+        )
+
+)
+
+*/
+```
+
+
+## Outros Repositórios
 
 ### CSharp 
 

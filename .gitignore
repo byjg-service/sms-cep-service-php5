@@ -74,3 +74,7 @@ packages/
 
 /java/nbproject/private/
 /java/dist/
+/nbproject/private/
+
+composer.lock
+vendor
