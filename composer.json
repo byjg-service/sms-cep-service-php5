@@ -10,6 +10,7 @@
     "require": {
         "dinke/curl-http-client": "dev-master"
     },
+	"minimum-stability": "dev",
 	"autoload": {
 		"psr-0": {
 			"ByJG\\": "src/"
