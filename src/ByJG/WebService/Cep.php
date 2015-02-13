@@ -41,11 +41,11 @@ class Cep extends BaseService
 
 		$info = explode(', ', $linha);
 		$result = array(
-			'logradouro' => str_replace('OK|', '', $info[0+$inc]),
-			'bairro' => $info[1+$inc],
-			'cidade' => $info[2+$inc],
-			'uf' => $info[3+$inc],
-			'ibge' => $info[4+$inc]
+			'logradouro' => str_replace('OK|', '', isset($info[0+$inc]) ? $info[0+$inc] : ""),
+			'bairro' => isset($info[1+$inc]) ? $info[1+$inc] : "",
+			'cidade' => isset($info[2+$inc]) ? $info[2+$inc] : "",
+			'uf' => isset($info[3+$inc]) ? $info[3+$inc] : "",
+			'ibge' => isset($info[4+$inc]) ? $info[4+$inc] : ""
 		);
 
 		if ($cep)
