@@ -84,7 +84,7 @@ class Cep extends BaseService
 	 *
 	 * @param string $logradouro
 	 * @param string $localidade
-	 * @param string $UF
+	 * @param string $uf
 	 * @return string
 	 */
 	public function obterCEP($logradouro, $localidade, $uf)
