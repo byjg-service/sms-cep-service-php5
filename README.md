@@ -1,3 +1,6 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/b983ca33369e43ebb85bc24496b03b69)](https://www.codacy.com/app/joao/sms-cep-service-php5)
+
 byjg-service-examples
 =====================
 
