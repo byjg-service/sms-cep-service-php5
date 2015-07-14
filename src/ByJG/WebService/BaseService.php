@@ -32,8 +32,9 @@ abstract class BaseService
 
 		$url = $this->URL . $this->_service;
 
-		$curl = new \Dinke\CurlHttpClient();
-		$response = $curl->sendPostData($url, $params, null, 5);
+		$webRequest = new \ByJG\Util\WebRequest($url);
+        $webRequest->setCurlOption(CURLOPT_TIMEOUT, 5);
+		$response = $webRequest->post($params);
 
 		$firstData = explode('|', $response);
 		$result = array(
