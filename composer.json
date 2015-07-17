@@ -1,16 +1,16 @@
 {
     "name": "byjg/sms-cep-service-php5",
-    "version": "1.0.1",
     "description": "Implementação em PHP para acesso ao WebService de CEP e SMS ByJG",
     "authors": [
         {
-            "name": "jg",
+            "name": "João Gilberto Magalhães",
             "email": "joao@byjg.com.br"
         }
     ],
     "require": {
         "byjg/webrequest": "~1.0"
     },
+	"license": "MIT",
 	"minimum-stability": "dev",
 	"autoload": {
 		"psr-0": {
