@@ -1,8 +1,8 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/?branch=master)
-[![Codacy Badge](https://www.codacy.com/project/badge/b983ca33369e43ebb85bc24496b03b69)](https://www.codacy.com/app/joao/sms-cep-service-php5)
-
 byjg-service-examples
 =====================
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/byjg/sms-cep-service-php5/?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/b983ca33369e43ebb85bc24496b03b69)](https://www.codacy.com/app/joao/sms-cep-service-php5)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/51321101-68ba-47b9-ad9b-e6ec5fb83f9f/mini.png)](https://insight.sensiolabs.com/projects/51321101-68ba-47b9-ad9b-e6ec5fb83f9f)
 
 Aqui você encontrará vários exemplos de implementação dos serviços ByJG em diversas linguagens. 
 
