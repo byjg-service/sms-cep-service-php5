@@ -103,7 +103,7 @@ class Cep extends BaseService
 
 			$info = explode('|', $result['raw']);
 			$result['data']['info'] = array();
-			foreach(array_slice($info, 2) as $linha)
+			foreach (array_slice($info, 2) as $linha)
 			{
 				$result['data']['info'][] = $this->parseCep($linha, true);
 			}
