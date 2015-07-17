@@ -30,10 +30,10 @@ abstract class BaseService
 		$params["usuario"] = $this->_username;
 		$params["senha"] = $this->_password;
 
-		$url = $this->URL . $this->_service;
+		$url = $this->URL.$this->_service;
 
 		$webRequest = new \ByJG\Util\WebRequest($url);
-        $webRequest->setCurlOption(CURLOPT_TIMEOUT, 5);
+		$webRequest->setCurlOption(CURLOPT_TIMEOUT, 5);
 		$response = $webRequest->post($params);
 
 		$firstData = explode('|', $response);
