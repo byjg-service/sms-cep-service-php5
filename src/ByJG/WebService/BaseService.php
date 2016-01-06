@@ -12,16 +12,18 @@ abstract class BaseService
 	protected $_username = "";
 	protected $_password = "";
 	protected $_service = "";
+        protected $_curlParams = [];
 
 	/**
 	 *
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function __construct($username, $password)
+	public function __construct($username, $password, $curlParams = [CURLOPT_TIMEOUT => 5])
 	{
 		$this->_username = $username;
 		$this->_password = $password;
+                $this->_curlParams = $curlParams;
 	}
 
 	protected function conectarServer($httpmethod, $params)
@@ -33,7 +35,11 @@ abstract class BaseService
 		$url = $this->URL.$this->_service;
 
 		$webRequest = new \ByJG\Util\WebRequest($url);
-		$webRequest->setCurlOption(CURLOPT_TIMEOUT, 5);
+
+                foreach ($this->_curlParams as $param => $value) {
+                    $webRequest->setCurlOption($param, $value);
+                }
+		
 		$response = $webRequest->post($params);
 
 		$firstData = explode('|', $response);

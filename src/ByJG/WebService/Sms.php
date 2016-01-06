@@ -18,16 +18,16 @@ class Sms extends BaseService
 	 * @param string $username
 	 * @param string $password
 	 */
-	public function __construct($username, $password)
+	public function __construct($username, $password, $curlParams = [CURLOPT_TIMEOUT => 5])
 	{
-		parent::__construct($username, $password);
+		parent::__construct($username, $password, $curlParams);
 		$this->_service = "sms";
 	}
 
 
 	/**
 	 * Obter a versão do WebService
-	 * 
+	 *
 	 * @return string
 	 */
 	public function obterVersao()
@@ -54,7 +54,7 @@ class Sms extends BaseService
 		return $this->conectarServer("enviarsms", $params);
 	}
 
-	// 
+	//
 
 	/**
 	 * Envia SMS para um lista.
@@ -70,7 +70,7 @@ class Sms extends BaseService
 			"lista" => implode('|', $lista),
 			"mensagem" => $mensagem
 		);
-		
+
 		return $this->conectarServer("enviarListaSMS", $params);
 	}
 
