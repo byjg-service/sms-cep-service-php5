@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "byjg/webrequest": "~1.0"
+        "byjg/webrequest": "5.0.0.x-dev"
     },
 	"license": "MIT",
 	"minimum-stability": "dev",

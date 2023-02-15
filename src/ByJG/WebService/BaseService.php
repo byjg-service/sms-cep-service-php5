@@ -7,7 +7,7 @@ namespace ByJG\WebService;
  */
 abstract class BaseService
 {
-    protected $URL         = "http://www.byjg.com.br/site/webservice.php/ws/";
+    protected $URL         = "https://www.byjg.com.br/site/webservice.php/ws/";
     protected $_username   = "";
     protected $_password   = "";
     protected $_service    = "";
@@ -31,20 +31,20 @@ abstract class BaseService
         $params["usuario"]    = $this->_username;
         $params["senha"]      = $this->_password;
 
-        $url = $this->URL . $this->_service;
+        $uri = \ByJG\Util\Uri::getInstanceFromString($this->URL . $this->_service);
 
-        $webRequest = new \ByJG\Util\WebRequest($url);
+        $request = \ByJG\Util\Psr7\Request::getInstance($uri)
+            ->withMethod('POST')
+            ->withBody(new \ByJG\Util\Psr7\MemoryStream(http_build_query($params)));
 
-        foreach ($this->_curlParams as $param => $value) {
-            $webRequest->setCurlOption($param, $value);
-        }
+        $response = \ByJG\Util\HttpClient::getInstance()->sendRequest($request);
 
-        $response = $webRequest->post($params);
+        $responseBody = $response->getBody()->getContents();
 
-        $firstData = explode('|', $response);
+        $firstData = explode('|', $responseBody);
         $result    = array(
             'status' => $firstData[0],
-            'raw'    => $response
+            'raw'    => $responseBody
         );
 
         if (isset($firstData[1])) {
