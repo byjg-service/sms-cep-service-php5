@@ -5,12 +5,11 @@ namespace ByJG\WebService;
 /**
  * Classe Base com todas as funcionalidades para acessar o serviço ByJG
  */
-abstract class BaseService
+class HttpSender extends AbstractSender
 {
     protected $URL         = "https://www.byjg.com.br/site/webservice.php/ws/";
     protected $_username   = "";
     protected $_password   = "";
-    protected $_service    = "";
     protected $_curlParams = [];
 
     /**
@@ -25,7 +24,7 @@ abstract class BaseService
         $this->_curlParams = $curlParams;
     }
 
-    protected function conectarServer($httpmethod, $params)
+    public function conectarServer($httpmethod, $params)
     {
         $params["httpmethod"] = $httpmethod;
         $params["usuario"]    = $this->_username;
@@ -39,28 +38,6 @@ abstract class BaseService
 
         $response = \ByJG\Util\HttpClient::getInstance()->sendRequest($request);
 
-        $responseBody = $response->getBody()->getContents();
-
-        $firstData = explode('|', $responseBody);
-        $result    = array(
-            'status' => $firstData[0],
-            'raw'    => $responseBody
-        );
-
-        if (isset($firstData[1])) {
-            $parsedData = explode(', ', $firstData[1]);
-
-            if (!isset($parsedData[1])) {
-                $parsedData[0] = null;
-                $parsedData[1] = $firstData[1];
-            }
-
-            $result['data'] = array(
-                "code" => $parsedData[0],
-                "info" => $parsedData[1]
-            );
-        }
-
-        return $result;
+        return $this->parseContents($response->getBody()->getContents());
     }
 }

@@ -10,18 +10,20 @@ namespace ByJG\WebService;
  * Joao Gilberto Magalhaes
  * http://www.byjg.com.br/
  */
-class Cep extends BaseService
+class Cep
 {
+
+    protected $senderObj = null;
 
     /**
      *
      * @param string $username
      * @param string $password
      */
-    public function __construct($username, $password)
+    public function __construct(AbstractSender $senderObj)
     {
-        parent::__construct($username, $password);
-        $this->_service = "cep";
+        $this->senderObj = clone $senderObj;
+        $this->senderObj->setService("cep");
     }
 
     /**
@@ -31,7 +33,7 @@ class Cep extends BaseService
      */
     public function obterVersao()
     {
-        return $this->conectarServer("obterversao", array());
+        return $this->senderObj->conectarServer("obterversao", array());
     }
 
     protected function parseCep($linha, $cep)
@@ -66,7 +68,7 @@ class Cep extends BaseService
             "cep" => $cep
         );
 
-        $result = $this->conectarServer("obterlogradouroauth", $params);
+        $result = $this->senderObj->conectarServer("obterlogradouroauth", $params);
         if ($result['status'] == 'OK') {
             $result['data']['code'] = 0;
 
@@ -92,7 +94,7 @@ class Cep extends BaseService
             "UF"         => $uf
         );
 
-        $result = $this->conectarServer("obtercepauth", $params);
+        $result = $this->senderObj->conectarServer("obtercepauth", $params);
 
         if ($result["status"] == 'OK') {
             $result['data']['code'] = 0;

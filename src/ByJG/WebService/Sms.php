@@ -10,18 +10,19 @@ namespace ByJG\WebService;
  * Joao Gilberto Magalhaes
  * http://www.byjg.com.br/
  */
-class Sms extends BaseService
+class Sms
 {
+    protected $senderObj = null;
 
     /**
      *
      * @param string $username
      * @param string $password
      */
-    public function __construct($username, $password, $curlParams = [CURLOPT_TIMEOUT => 5])
+    public function __construct(AbstractSender $senderObj)
     {
-        parent::__construct($username, $password, $curlParams);
-        $this->_service = "sms";
+        $this->senderObj = clone $senderObj;
+        $this->senderObj->setService("sms");
     }
 
     /**
@@ -31,7 +32,7 @@ class Sms extends BaseService
      */
     public function obterVersao()
     {
-        return $this->conectarServer("obterversao", array());
+        return $this->senderObj->conectarServer("obterversao", array());
     }
 
     /**
@@ -50,7 +51,7 @@ class Sms extends BaseService
             "mensagem" => utf8_encode($mensagem)
         );
 
-        return $this->conectarServer("enviarsms", $params);
+        return $this->senderObj->conectarServer("enviarsms", $params);
     }
     //
 
@@ -69,7 +70,7 @@ class Sms extends BaseService
             "mensagem" => $mensagem
         );
 
-        return $this->conectarServer("enviarListaSMS", $params);
+        return $this->senderObj->conectarServer("enviarListaSMS", $params);
     }
 
     /**
@@ -104,7 +105,7 @@ class Sms extends BaseService
             "repeticoes" => $repeticoes
         );
 
-        return $this->conectarServer("agendarEnvio", $params);
+        return $this->senderObj->conectarServer("agendarEnvio", $params);
     }
 
     /**
@@ -114,7 +115,7 @@ class Sms extends BaseService
      */
     public function recursos()
     {
-        return $this->conectarServer("recursos", array());
+        return $this->senderObj->conectarServer("recursos", array());
     }
 
     /**
@@ -124,6 +125,6 @@ class Sms extends BaseService
      */
     public function creditos()
     {
-        return $this->conectarServer("creditos", array());
+        return $this->senderObj->conectarServer("creditos", array());
     }
 }

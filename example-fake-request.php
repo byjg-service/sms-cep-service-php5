@@ -1,13 +1,10 @@
 <?php
 
-use ByJG\WebService\HttpSender;
+use ByJG\WebService\FakeSender;
 
 require "vendor/autoload.php";
 
-$usuario = '-seu-usuario-';
-$senha = '-sua-senha-';
-
-$sender = new HttpSender($usuario, $senha);
+$sender = new FakeSender();
 
 $sms = new \ByJG\WebService\Sms($sender);
 print_r($sms->obterVersao());

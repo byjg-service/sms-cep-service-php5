@@ -36,8 +36,10 @@ require "vendor/autoload.php";
 $usuario = 'NOMEUSUARIO';
 $senha = 'SENHA';
 
+$sender = new \ByJG\WebService\Sender($usuario, $senha);
+
 // Enviar um SMS
-$sms = new \ByJG\WebService\Sms($usuario, $senha);
+$sms = new \ByJG\WebService\Sms($sender);
 $retorno = $sms->enviarSms('21', '999991234', 'Mensagem do SMS');
 
 /***
@@ -66,8 +68,10 @@ require "vendor/autoload.php";
 $usuario = 'NOMEUSUARIO';
 $senha = 'SENHA';
 
+$sender = new \ByJG\WebService\Sender($usuario, $senha);
+
 // Obter o Logradouro à partir do CEP
-$cep = new \ByJG\WebService\Cep($usuario, $senha);
+$cep = new \ByJG\WebService\Cep($sender);
 $retorno = $cep->obterLogradouro('01311000');
 
 /***
